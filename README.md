@@ -1,7 +1,5 @@
 # OCI Support Request Skill
 
-![Prepare OCI Support Request workflow](docs/assets/prepare-oci-support-request-header.png)
-
 A portable Agent Skill for Codex, Claude Code, and compatible coding agents that prepares evidence-backed OCI technical support requests with the OCI CLI.
 
 The skill selects issue-specific, read-only diagnostic commands, sanitizes collected JSON, generates a support-request payload, and optionally creates or updates an OCI Support service request after explicit user approval.
@@ -28,6 +26,7 @@ The skill moves that discovery work to the beginning. It selects focused read-on
 ## What it does
 
 - Collects the affected service, symptom, region, UTC incident window, and resource OCIDs.
+- Recommends the correct technical SR severity from current operational impact, workaround availability, and contact coverage, then asks the customer to confirm it.
 - Plans allowlisted OCI CLI `get`, `list`, Audit, and Monitoring commands before execution.
 - Redacts common secret-bearing fields, tags, and instance metadata from collected JSON.
 - Produces a command manifest, sanitized evidence files, and a paste-ready SR description.
@@ -164,13 +163,14 @@ The tests run locally and do not access OCI or create support requests.
 └── SKILL.md              # Claude Code project adapter
 docs/
 ├── assets/
-│   └── prepare-oci-support-request-header.png
+│   └── github-social-preview.jpg
 └── index.html
 skills/prepare-oci-support-request/
 ├── SKILL.md
 ├── agents/openai.yaml
 ├── references/
 │   ├── evidence-map.md
+│   ├── severity-guide.md
 │   └── support-cli.md
 └── scripts/
     ├── build_sr_payload.py

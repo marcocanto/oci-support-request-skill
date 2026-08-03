@@ -26,6 +26,8 @@ Official references:
 8. Supply the tenancy home region with `--homeregion` when applicable.
 9. Inspect `oci support incident create --help` because required fields and supported severity values differ across OCI CLI versions. Older releases can require CSI and omit `LOW` severity.
 
+Before preparing a technical request, read [severity-guide.md](severity-guide.md), recommend the closest severity from the current customer-confirmed impact, and ask the user to confirm it.
+
 ## Read-only preflight
 
 Run these without changing Support state:
@@ -62,7 +64,7 @@ Or use `scripts/build_sr_payload.py` with a reviewed intake file. The core techn
 - `problemType` set to `TECH`
 - Title
 - Detailed description
-- Severity accepted by the installed CLI
+- Confirmed severity accepted by the installed CLI (`HIGHEST`, `HIGH`, `MEDIUM`, or `LOW` in current releases)
 - OCI user OCID
 - Home region
 - Support user group ID for technical requests when required

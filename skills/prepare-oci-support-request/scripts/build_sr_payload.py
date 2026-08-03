@@ -11,6 +11,30 @@ from typing import Any
 
 
 SEVERITIES = {"LOW", "MEDIUM", "HIGH", "HIGHEST"}
+SEVERITY_ALIASES = {
+    "1": "HIGHEST",
+    "CRITICAL": "HIGHEST",
+    "CRITICAL ISSUE": "HIGHEST",
+    "CRITICAL OUTAGE": "HIGHEST",
+    "HIGHEST": "HIGHEST",
+    "SEV 1": "HIGHEST",
+    "SEVERITY 1": "HIGHEST",
+    "2": "HIGH",
+    "HIGH": "HIGH",
+    "SEV 2": "HIGH",
+    "SEVERITY 2": "HIGH",
+    "SIGNIFICANT IMPAIRMENT": "HIGH",
+    "3": "MEDIUM",
+    "MEDIUM": "MEDIUM",
+    "SEV 3": "MEDIUM",
+    "SEVERITY 3": "MEDIUM",
+    "TECHNICAL ISSUE": "MEDIUM",
+    "4": "LOW",
+    "GENERAL GUIDANCE": "LOW",
+    "LOW": "LOW",
+    "SEV 4": "LOW",
+    "SEVERITY 4": "LOW",
+}
 
 
 def required_text(data: dict[str, Any], key: str) -> str:
@@ -26,10 +50,18 @@ def optional_text(payload: dict[str, Any], data: dict[str, Any], source: str, ta
         payload[target] = value.strip()
 
 
+def normalize_severity(value: str) -> str:
+    normalized = " ".join(value.upper().replace("-", " ").split())
+    severity = SEVERITY_ALIASES.get(normalized)
+    if severity is None:
+        raise ValueError(
+            "severity must be an OCI CLI value or support label for Severity 1 through 4"
+        )
+    return severity
+
+
 def build_payload(data: dict[str, Any]) -> dict[str, Any]:
-    severity = required_text(data, "severity").upper()
-    if severity not in SEVERITIES:
-        raise ValueError(f"severity must be one of: {', '.join(sorted(SEVERITIES))}")
+    severity = normalize_severity(required_text(data, "severity"))
     payload: dict[str, Any] = {
         "compartmentId": required_text(data, "tenancy_id"),
         "description": required_text(data, "description"),

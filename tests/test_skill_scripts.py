@@ -148,6 +148,28 @@ class PayloadBuilderTests(unittest.TestCase):
             self.assertIn("requires a confirmed 24x7 contact", completed.stderr)
             self.assertFalse(output_path.exists())
 
+    def test_maps_support_severity_label_to_cli_value(self) -> None:
+        builder = load_module("build_sr_payload", PAYLOAD_BUILDER)
+        base = {
+            "tenancy_id": "ocid1.tenancy.example",
+            "description": "Example issue description",
+            "title": "Example technical request",
+            "user_ocid": "ocid1.user.example",
+            "home_region": "IAD",
+        }
+        expected = {
+            "Severity 1": "HIGHEST",
+            "Significant Impairment": "HIGH",
+            "Technical Issue": "MEDIUM",
+            "General Guidance": "LOW",
+        }
+        for label, cli_value in expected.items():
+            with self.subTest(label=label):
+                intake = dict(base, severity=label)
+                if cli_value == "HIGHEST":
+                    intake["contacts"] = [{"name": "Confirmed 24x7 contact"}]
+                self.assertEqual(cli_value, builder.build_payload(intake)["severity"])
+
 
 class PackagingTests(unittest.TestCase):
     def test_claude_code_adapter_points_to_the_canonical_skill(self) -> None:
@@ -157,6 +179,13 @@ class PackagingTests(unittest.TestCase):
         self.assertEqual((SKILL / "SKILL.md").resolve(), resolved_target)
         self.assertIn("name: prepare-oci-support-request", adapter)
         self.assertIn(str(relative_target), adapter)
+
+    def test_severity_guide_uses_public_sources_and_cli_values(self) -> None:
+        guide = (SKILL / "references" / "severity-guide.md").read_text(encoding="utf-8")
+        for value in ("HIGHEST", "HIGH", "MEDIUM", "LOW"):
+            self.assertIn(f"`{value}`", guide)
+        self.assertIn("https://docs.oracle.com/", guide)
+        self.assertNotIn("Oracle Restricted", guide)
 
 
 if __name__ == "__main__":
