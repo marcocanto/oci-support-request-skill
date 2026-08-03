@@ -1,10 +1,29 @@
 # OCI Support Request Skill
 
-A Codex skill for preparing evidence-backed OCI technical support requests with the OCI CLI.
+![Prepare OCI Support Request workflow](docs/assets/prepare-oci-support-request-header.png)
+
+A portable Agent Skill for Codex, Claude Code, and compatible coding agents that prepares evidence-backed OCI technical support requests with the OCI CLI.
 
 The skill selects issue-specific, read-only diagnostic commands, sanitizes collected JSON, generates a support-request payload, and optionally creates or updates an OCI Support service request after explicit user approval.
 
 Explore the [live interactive overview](https://marcocanto.github.io/oci-support-request-skill/) or view its [HTML source](docs/index.html). The page explains the workflow and includes a copy-ready starter prompt builder.
+
+## Why use it
+
+Customers commonly lose time at two points in the support process:
+
+1. **Getting through intake:** Filing an SR through the Console can require several turns with the support chat interface before the request is created. With a configured OCI Support Management CLI, this skill can prepare the package and offer a direct CLI submission path after the customer reviews and approves the exact request.
+2. **Waiting for missing-information requests:** Frontline support engineers often need service-specific resource OCIDs, request IDs, timestamps, configuration details, metrics, or network context before troubleshooting can begin. If those details are absent, the first response may simply ask the customer to collect them, adding another round trip.
+
+The skill moves that discovery work to the beginning. It selects focused read-only checks for the affected service and symptom, packages the results with a concise problem statement, and makes the evidence available with the initial SR.
+
+### Key benefits
+
+- **Faster time to triage:** Give the service team the identifiers and context needed to begin investigation with the first handoff.
+- **Fewer support round trips:** Reduce first-response requests for commonly missing evidence.
+- **Less repetitive intake:** Produce a paste-ready SR or use the CLI submission workflow when the account supports it.
+- **Service-aware evidence:** Collect different information for performance, connectivity, lifecycle, authorization, capacity, configuration, and recovery symptoms.
+- **Safer automation:** Keep evidence collection read-only, redact common secret-bearing fields, and require explicit approval before every SR write.
 
 ## What it does
 
@@ -24,6 +43,10 @@ Issue overlays cover control-plane, connectivity, performance, authorization, da
 
 ## Install
 
+The canonical package is `skills/prepare-oci-support-request/`. Its `SKILL.md` uses the portable Agent Skills format: YAML frontmatter for discovery followed by Markdown workflow instructions and relative links to bundled scripts and references.
+
+### Codex
+
 Copy `skills/prepare-oci-support-request` into your Codex skills directory:
 
 ```bash
@@ -32,6 +55,36 @@ cp -R skills/prepare-oci-support-request "${CODEX_HOME:-$HOME/.codex}/skills/"
 ```
 
 Restart Codex after installation so the skill is discovered.
+
+Invoke it explicitly with `$prepare-oci-support-request`, or describe an OCI support-intake task that matches the skill description.
+
+### Claude Code
+
+Claude Code uses the same `SKILL.md` structure. For a personal skill available across projects:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R skills/prepare-oci-support-request ~/.claude/skills/
+```
+
+For a skill committed to a specific project:
+
+```bash
+mkdir -p .claude/skills
+cp -R skills/prepare-oci-support-request .claude/skills/
+```
+
+This repository also includes `.claude/skills/prepare-oci-support-request/SKILL.md`, a project adapter that loads the canonical package without duplicating its implementation. Start or restart Claude Code after the first installation, then invoke the skill with:
+
+```text
+/prepare-oci-support-request
+```
+
+Claude Code can also load it automatically when a request matches the description in the skill frontmatter.
+
+### Other Agent Skills-compatible agents
+
+Install the complete `skills/prepare-oci-support-request/` directory in the harness's skill-discovery location. Keep `SKILL.md`, `scripts/`, and `references/` together so the relative resource links continue to work. The package intentionally uses only the portable `name` and `description` frontmatter fields; Codex-specific interface metadata remains isolated under `agents/openai.yaml`.
 
 ## Prerequisites
 
@@ -107,6 +160,12 @@ The tests run locally and do not access OCI or create support requests.
 ## Repository layout
 
 ```text
+.claude/skills/prepare-oci-support-request/
+└── SKILL.md              # Claude Code project adapter
+docs/
+├── assets/
+│   └── prepare-oci-support-request-header.png
+└── index.html
 skills/prepare-oci-support-request/
 ├── SKILL.md
 ├── agents/openai.yaml

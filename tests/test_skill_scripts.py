@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / "skills" / "prepare-oci-support-request"
 COLLECTOR = SKILL / "scripts" / "collect_evidence.py"
 PAYLOAD_BUILDER = SKILL / "scripts" / "build_sr_payload.py"
+CLAUDE_ADAPTER = ROOT / ".claude" / "skills" / "prepare-oci-support-request" / "SKILL.md"
 
 
 def load_module(name: str, path: Path):
@@ -146,6 +147,16 @@ class PayloadBuilderTests(unittest.TestCase):
             self.assertEqual(2, completed.returncode)
             self.assertIn("requires a confirmed 24x7 contact", completed.stderr)
             self.assertFalse(output_path.exists())
+
+
+class PackagingTests(unittest.TestCase):
+    def test_claude_code_adapter_points_to_the_canonical_skill(self) -> None:
+        adapter = CLAUDE_ADAPTER.read_text(encoding="utf-8")
+        relative_target = Path("../../../skills/prepare-oci-support-request/SKILL.md")
+        resolved_target = (CLAUDE_ADAPTER.parent / relative_target).resolve()
+        self.assertEqual((SKILL / "SKILL.md").resolve(), resolved_target)
+        self.assertIn("name: prepare-oci-support-request", adapter)
+        self.assertIn(str(relative_target), adapter)
 
 
 if __name__ == "__main__":
