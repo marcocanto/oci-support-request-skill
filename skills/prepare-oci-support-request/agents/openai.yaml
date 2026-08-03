@@ -1,0 +1,4 @@
+interface:
+  display_name: "Prepare OCI Support Request"
+  short_description: "Collect OCI evidence and prepare an SR"
+  default_prompt: "Use $prepare-oci-support-request to collect read-only OCI evidence and prepare a support request."
