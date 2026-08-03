@@ -1,0 +1,1277 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="An interactive overview of the Prepare OCI Support Request Codex skill.">
+  <meta name="color-scheme" content="light">
+  <title>Prepare OCI Support Request | Skill Overview</title>
+  <style>
+    :root {
+      --ink: #161513;
+      --muted: #68635d;
+      --paper: #f7f4ee;
+      --surface: #fffdf8;
+      --line: #ded8ce;
+      --accent: #c74634;
+      --accent-dark: #8f2e22;
+      --accent-soft: #f5ddd7;
+      --safe: #246b4f;
+      --safe-soft: #dceee5;
+      --navy: #1d2a38;
+      --code: #202933;
+      --shadow: 0 22px 60px rgba(39, 31, 24, 0.12);
+      --radius-lg: 28px;
+      --radius-md: 18px;
+      --radius-sm: 12px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 94% 4%, rgba(199, 70, 52, 0.13), transparent 27rem),
+        linear-gradient(180deg, #fbf9f4 0%, var(--paper) 72%, #efeae1 100%);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 100;
+      transform: translateY(-150%);
+      padding: 10px 14px;
+      border-radius: 8px;
+      color: white;
+      background: var(--ink);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
+    .shell {
+      width: min(calc(100% - 40px), var(--max));
+      margin-inline: auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(222, 216, 206, 0.82);
+      background: rgba(251, 249, 244, 0.86);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      text-decoration: none;
+      font-weight: 760;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 32px;
+      height: 32px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: white;
+      background: var(--accent);
+      box-shadow: 0 8px 18px rgba(199, 70, 52, 0.24);
+      font-size: 13px;
+      font-weight: 850;
+      letter-spacing: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+      font-size: 14px;
+      font-weight: 650;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--accent-dark);
+    }
+
+    .hero {
+      padding: 104px 0 72px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(340px, 0.85fr);
+      gap: 72px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 22px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 2px;
+      background: var(--accent);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 780px;
+      margin-bottom: 24px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(48px, 7vw, 82px);
+      line-height: 0.99;
+      letter-spacing: -0.052em;
+      font-weight: 500;
+    }
+
+    .hero-lede {
+      max-width: 700px;
+      margin-bottom: 34px;
+      color: var(--muted);
+      font-size: clamp(18px, 2vw, 21px);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .button {
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      padding: 0 18px;
+      border: 1px solid transparent;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 750;
+      transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: white;
+      background: var(--accent);
+      box-shadow: 0 12px 26px rgba(199, 70, 52, 0.24);
+    }
+
+    .button-primary:hover {
+      background: var(--accent-dark);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      color: var(--ink);
+      background: rgba(255, 253, 248, 0.7);
+    }
+
+    .button-secondary:hover {
+      box-shadow: 0 10px 24px rgba(39, 31, 24, 0.08);
+      background: var(--surface);
+    }
+
+    .hero-card {
+      position: relative;
+      overflow: hidden;
+      padding: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: var(--radius-lg);
+      color: white;
+      background: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -92px;
+      bottom: -96px;
+      border: 38px solid rgba(199, 70, 52, 0.48);
+      border-radius: 50%;
+    }
+
+    .status-row {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .status-label {
+      color: #c8d2dc;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      color: #dff7eb;
+      background: rgba(83, 186, 135, 0.14);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .status::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #64d69e;
+      box-shadow: 0 0 0 4px rgba(100, 214, 158, 0.12);
+    }
+
+    .guardrail-list {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 17px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .guardrail-list li {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 13px;
+      align-items: start;
+    }
+
+    .check {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: #b9f0d5;
+      background: rgba(100, 214, 158, 0.12);
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .guardrail-list strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: 15px;
+    }
+
+    .guardrail-list span {
+      color: #aebbc6;
+      font-size: 13px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      overflow: hidden;
+      margin-top: 52px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: var(--line);
+    }
+
+    .stat {
+      padding: 28px;
+      background: rgba(255, 253, 248, 0.94);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 3px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 500;
+    }
+
+    .stat span {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    section {
+      padding: 86px 0;
+    }
+
+    .section-heading {
+      max-width: 690px;
+      margin-bottom: 42px;
+    }
+
+    .section-kicker {
+      margin-bottom: 13px;
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 850;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin-bottom: 16px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 5vw, 58px);
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      font-weight: 500;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      min-height: 224px;
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      background: rgba(255, 253, 248, 0.72);
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 29px;
+      border-radius: 50%;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 700;
+    }
+
+    .step h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+      letter-spacing: -0.02em;
+    }
+
+    .step p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .builder-section {
+      position: relative;
+    }
+
+    .builder-section::before {
+      content: "";
+      position: absolute;
+      inset: 28px 0;
+      z-index: -1;
+      background: var(--navy);
+    }
+
+    .builder {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: #263544;
+      box-shadow: 0 26px 72px rgba(14, 24, 34, 0.2);
+    }
+
+    .builder-form,
+    .prompt-panel {
+      padding: 46px;
+    }
+
+    .builder-form {
+      border-right: 1px solid rgba(255, 255, 255, 0.1);
+      background: #1e2b38;
+    }
+
+    .builder h2 {
+      max-width: 520px;
+      margin-bottom: 12px;
+      color: white;
+      font-size: clamp(34px, 4vw, 50px);
+    }
+
+    .builder-intro {
+      margin-bottom: 30px;
+      color: #b8c4cf;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .field {
+      display: grid;
+      gap: 7px;
+    }
+
+    .field-wide {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      color: #dce4eb;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    input,
+    select {
+      width: 100%;
+      min-height: 48px;
+      padding: 0 13px;
+      border: 1px solid #506171;
+      border-radius: 10px;
+      color: white;
+      outline: none;
+      background: #2b3a49;
+    }
+
+    input::placeholder {
+      color: #8493a1;
+    }
+
+    input:focus,
+    select:focus {
+      border-color: #f09a8d;
+      box-shadow: 0 0 0 3px rgba(240, 154, 141, 0.14);
+    }
+
+    select option {
+      color: white;
+      background: #2b3a49;
+    }
+
+    .prompt-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+        #263544;
+      background-size: 24px 24px;
+    }
+
+    .prompt-label {
+      margin-bottom: 14px;
+      color: #9fb0bf;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .prompt-output {
+      min-height: 250px;
+      margin: 0;
+      white-space: pre-wrap;
+      color: #f7f9fa;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .copy-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    .copy-note {
+      color: #9fb0bf;
+      font-size: 12px;
+    }
+
+    .copy-button {
+      min-width: 145px;
+      border: 0;
+      background: #f4e1dc;
+      color: var(--accent-dark);
+    }
+
+    .copy-button:hover {
+      background: white;
+    }
+
+    .coverage-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 58px;
+      align-items: start;
+    }
+
+    .coverage-copy {
+      position: sticky;
+      top: 110px;
+    }
+
+    .coverage-copy p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .service-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .service {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      min-height: 62px;
+      padding: 13px 15px;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      background: var(--surface);
+      font-size: 14px;
+      font-weight: 720;
+    }
+
+    .service-code {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 9px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .safety-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .safety-card {
+      padding: 34px;
+      border-radius: var(--radius-md);
+    }
+
+    .safety-card.safe {
+      border: 1px solid #bad8c8;
+      background: var(--safe-soft);
+    }
+
+    .safety-card.gated {
+      border: 1px solid #e2c4bc;
+      background: var(--accent-soft);
+    }
+
+    .safety-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      font-size: 21px;
+    }
+
+    .safety-card ul {
+      display: grid;
+      gap: 10px;
+      margin: 0;
+      padding-left: 19px;
+      color: #49453f;
+    }
+
+    .outputs {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .output-card {
+      padding: 24px;
+      border-top: 3px solid var(--accent);
+      border-radius: 4px 4px var(--radius-sm) var(--radius-sm);
+      background: var(--surface);
+      box-shadow: 0 10px 30px rgba(39, 31, 24, 0.06);
+    }
+
+    .file-type {
+      display: inline-block;
+      margin-bottom: 27px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      color: var(--accent-dark);
+      background: var(--accent-soft);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      font-weight: 850;
+    }
+
+    .output-card h3 {
+      margin-bottom: 8px;
+      font-size: 17px;
+    }
+
+    .output-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .install {
+      display: grid;
+      grid-template-columns: 0.75fr 1.25fr;
+      gap: 48px;
+      align-items: center;
+      padding: 48px;
+      border-radius: var(--radius-lg);
+      color: white;
+      background: var(--ink);
+    }
+
+    .install h2 {
+      margin-bottom: 13px;
+      color: white;
+      font-size: clamp(32px, 4vw, 48px);
+    }
+
+    .install p {
+      margin-bottom: 0;
+      color: #bcb6ae;
+    }
+
+    .code-block {
+      position: relative;
+      overflow-x: auto;
+      padding: 24px;
+      border: 1px solid #3b3a37;
+      border-radius: var(--radius-sm);
+      background: var(--code);
+    }
+
+    .code-block code {
+      white-space: pre;
+      color: #f5eee5;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    .mini-copy {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      padding: 7px 10px;
+      border: 1px solid #5a5d60;
+      border-radius: 7px;
+      color: #d9dde0;
+      background: #303942;
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .mini-copy:hover {
+      color: white;
+      border-color: #9ca7b0;
+    }
+
+    footer {
+      padding: 44px 0 52px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .footer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-row a {
+      color: var(--accent-dark);
+      font-weight: 750;
+      text-decoration: none;
+    }
+
+    .footer-row a:hover {
+      text-decoration: underline;
+    }
+
+    :focus-visible {
+      outline: 3px solid rgba(199, 70, 52, 0.34);
+      outline-offset: 3px;
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .builder,
+      .coverage-grid,
+      .install {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 76px;
+      }
+
+      .hero-card {
+        max-width: 620px;
+      }
+
+      .workflow {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .builder-form {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      }
+
+      .coverage-copy {
+        position: static;
+      }
+
+      .outputs {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 680px) {
+      .shell {
+        width: min(calc(100% - 28px), var(--max));
+      }
+
+      .nav-links a:not(.repo-link) {
+        display: none;
+      }
+
+      .hero {
+        padding: 60px 0 42px;
+      }
+
+      .hero-grid {
+        gap: 42px;
+      }
+
+      h1 {
+        font-size: clamp(44px, 15vw, 64px);
+      }
+
+      .stats,
+      .workflow,
+      .service-list,
+      .safety-grid,
+      .outputs {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 64px 0;
+      }
+
+      .builder-form,
+      .prompt-panel,
+      .install {
+        padding: 28px 22px;
+      }
+
+      .fields {
+        grid-template-columns: 1fr;
+      }
+
+      .field-wide {
+        grid-column: auto;
+      }
+
+      .prompt-output {
+        min-height: 310px;
+      }
+
+      .copy-row,
+      .footer-row {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .copy-button {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="topbar">
+    <nav class="nav shell" aria-label="Primary navigation">
+      <a class="brand" href="#top" aria-label="Prepare OCI Support Request home">
+        <span class="brand-mark" aria-hidden="true">SR</span>
+        <span>Prepare OCI Support Request</span>
+      </a>
+      <div class="nav-links">
+        <a href="#workflow">Workflow</a>
+        <a href="#prompt-builder">Try it</a>
+        <a href="#safety">Safety</a>
+        <a class="repo-link" href="https://github.com/marcocanto/oci-support-request-skill">Repository</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="shell">
+        <div class="hero-grid">
+          <div>
+            <div class="eyebrow">Codex skill for OCI Support</div>
+            <h1>From OCI symptom to support-ready evidence.</h1>
+            <p class="hero-lede">Turn a customer issue into a concise technical SR package with targeted OCI CLI evidence, automatic redaction, and approval gates before anything is sent.</p>
+            <div class="actions">
+              <a class="button button-primary" href="#prompt-builder">Build a starter prompt</a>
+              <a class="button button-secondary" href="#workflow">See how it works</a>
+            </div>
+          </div>
+
+          <aside class="hero-card" aria-label="Skill safety guardrails">
+            <div class="status-row">
+              <span class="status-label">Guardrails</span>
+              <span class="status">Active</span>
+            </div>
+            <ul class="guardrail-list">
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <div><strong>Plan first</strong><span>Shows commands and missing inputs before collection.</span></div>
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <div><strong>Read-only evidence</strong><span>Uses predefined GET, LIST, Audit, and Monitoring operations.</span></div>
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <div><strong>Review before sharing</strong><span>Redacts common secret-bearing fields and produces a manifest.</span></div>
+              </li>
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <div><strong>Approval before writes</strong><span>Never creates or changes an SR without an exact preview and confirmation.</span></div>
+              </li>
+            </ul>
+          </aside>
+        </div>
+
+        <div class="stats" aria-label="Skill coverage summary">
+          <div class="stat"><strong>15</strong><span>OCI service families</span></div>
+          <div class="stat"><strong>8</strong><span>Symptom overlays</span></div>
+          <div class="stat"><strong>0</strong><span>SR writes without approval</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="section-kicker">The workflow</div>
+          <h2>A small, evidence-backed support package.</h2>
+          <p>The skill keeps collection, preparation, and submission separate so each stage is easy to inspect.</p>
+        </div>
+
+        <div class="workflow">
+          <article class="step">
+            <div class="step-number">1</div>
+            <h3>Describe the issue</h3>
+            <p>Provide the service, symptom, region, UTC window, resource OCIDs, error, and impact.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">2</div>
+            <h3>Preview the plan</h3>
+            <p>Review the selected read-only commands and see which required inputs are still missing.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">3</div>
+            <h3>Collect and sanitize</h3>
+            <p>Run the approved evidence plan and redact common secret, token, tag, and metadata fields.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">4</div>
+            <h3>Build the SR</h3>
+            <p>Generate a concise description, evidence manifest, attachments, and optional CLI payload.</p>
+          </article>
+          <article class="step">
+            <div class="step-number">5</div>
+            <h3>Approve and verify</h3>
+            <p>Preview every write, approve it explicitly, and read the SR back to verify the result.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="builder-section" id="prompt-builder">
+      <div class="shell">
+        <div class="builder">
+          <div class="builder-form">
+            <div class="section-kicker">Try the interaction</div>
+            <h2>Build a useful first prompt.</h2>
+            <p class="builder-intro">A little context up front gives the skill enough information to propose focused evidence instead of a generic checklist.</p>
+
+            <form class="fields" id="prompt-form">
+              <div class="field">
+                <label for="service">OCI service</label>
+                <select id="service" name="service">
+                  <option>Block Volume</option>
+                  <option>Compute</option>
+                  <option>VCN</option>
+                  <option>Object Storage</option>
+                  <option>File Storage</option>
+                  <option>Database</option>
+                  <option>Database with PostgreSQL</option>
+                  <option>OKE</option>
+                  <option>Load Balancer</option>
+                  <option>Network Load Balancer</option>
+                  <option>FastConnect or Site-to-Site VPN</option>
+                  <option>DNS</option>
+                  <option>Functions</option>
+                  <option>Identity</option>
+                  <option>Streaming</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="symptom">Symptom</label>
+                <select id="symptom" name="symptom">
+                  <option>performance</option>
+                  <option>connectivity</option>
+                  <option>control-plane failure</option>
+                  <option>authorization</option>
+                  <option>capacity</option>
+                  <option>lifecycle failure</option>
+                  <option>configuration</option>
+                  <option>data recovery</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="region">Region</label>
+                <input id="region" name="region" value="us-ashburn-1" autocomplete="off">
+              </div>
+
+              <div class="field">
+                <label for="window">UTC incident window</label>
+                <input id="window" name="window" value="14:00 to 15:00 UTC" autocomplete="off">
+              </div>
+
+              <div class="field field-wide">
+                <label for="resource">Affected resource</label>
+                <input id="resource" name="resource" placeholder="Paste the affected resource OCID">
+              </div>
+
+              <div class="field field-wide">
+                <label for="impact">Observed behavior or impact</label>
+                <input id="impact" name="impact" placeholder="For example: elevated latency affecting production reads">
+              </div>
+            </form>
+          </div>
+
+          <div class="prompt-panel">
+            <div>
+              <div class="prompt-label">Copy-ready prompt</div>
+              <pre class="prompt-output" id="prompt-output" aria-live="polite"></pre>
+            </div>
+            <div class="copy-row">
+              <span class="copy-note" id="copy-status" aria-live="polite">Review the generated prompt before sharing it.</span>
+              <button class="button copy-button" id="copy-prompt" type="button">Copy prompt</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="coverage">
+      <div class="shell coverage-grid">
+        <div class="coverage-copy">
+          <div class="section-kicker">Service coverage</div>
+          <h2>Focused evidence for common OCI services.</h2>
+          <p>Each service family maps to a small set of resource-specific CLI checks. Symptom overlays add Audit, Monitoring, limits, connectivity context, or recovery metadata only when relevant.</p>
+        </div>
+
+        <div class="service-list" aria-label="Supported OCI services">
+          <div class="service"><span class="service-code">BV</span>Block Volume</div>
+          <div class="service"><span class="service-code">CO</span>Compute</div>
+          <div class="service"><span class="service-code">VCN</span>Virtual Cloud Network</div>
+          <div class="service"><span class="service-code">OS</span>Object Storage</div>
+          <div class="service"><span class="service-code">FS</span>File Storage</div>
+          <div class="service"><span class="service-code">DB</span>Database</div>
+          <div class="service"><span class="service-code">PG</span>Database with PostgreSQL</div>
+          <div class="service"><span class="service-code">OKE</span>Kubernetes Engine</div>
+          <div class="service"><span class="service-code">LB</span>Load Balancer</div>
+          <div class="service"><span class="service-code">NLB</span>Network Load Balancer</div>
+          <div class="service"><span class="service-code">FC</span>FastConnect and VPN</div>
+          <div class="service"><span class="service-code">DNS</span>DNS</div>
+          <div class="service"><span class="service-code">FN</span>Functions</div>
+          <div class="service"><span class="service-code">IAM</span>Identity</div>
+          <div class="service"><span class="service-code">ST</span>Streaming</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="safety">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="section-kicker">Safety model</div>
+          <h2>Read freely. Write deliberately.</h2>
+          <p>The skill treats evidence gathering and Support Management as two different trust boundaries.</p>
+        </div>
+
+        <div class="safety-grid">
+          <article class="safety-card safe">
+            <h3><span aria-hidden="true">●</span> Read-only collection</h3>
+            <ul>
+              <li>Resource GET and LIST operations</li>
+              <li>Narrow Audit event windows</li>
+              <li>Resource-filtered Monitoring queries</li>
+              <li>Current service limit values</li>
+              <li>Plan mode before execution</li>
+            </ul>
+          </article>
+
+          <article class="safety-card gated">
+            <h3><span aria-hidden="true">◆</span> Explicit approval required</h3>
+            <ul>
+              <li>Create a support request</li>
+              <li>Add a customer-visible comment</li>
+              <li>Upload each reviewed attachment</li>
+              <li>Add or change a contact</li>
+              <li>Update or close an SR</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="outputs">
+      <div class="shell">
+        <div class="section-heading">
+          <div class="section-kicker">What you receive</div>
+          <h2>Small artifacts that shorten triage.</h2>
+          <p>The default output is designed to be reviewed quickly and attached selectively.</p>
+        </div>
+
+        <div class="outputs">
+          <article class="output-card">
+            <span class="file-type">TXT</span>
+            <h3>SR Description</h3>
+            <p>A paste-ready problem statement with impact, timing, resources, errors, and troubleshooting.</p>
+          </article>
+          <article class="output-card">
+            <span class="file-type">JSON</span>
+            <h3>Evidence files</h3>
+            <p>Sanitized outputs from the focused OCI CLI commands that completed successfully.</p>
+          </article>
+          <article class="output-card">
+            <span class="file-type">JSON</span>
+            <h3>Manifest</h3>
+            <p>Commands attempted, UTC execution times, skipped checks, missing inputs, and failures.</p>
+          </article>
+          <article class="output-card">
+            <span class="file-type">JSON</span>
+            <h3>SR payload</h3>
+            <p>An optional validated TECH request body that remains local until submission is approved.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install">
+      <div class="shell">
+        <div class="install">
+          <div>
+            <div class="section-kicker">Install the skill</div>
+            <h2>Add it to Codex.</h2>
+            <p>Copy the skill folder into your Codex skills directory, then restart Codex so it can discover the new capability.</p>
+          </div>
+          <div class="code-block">
+            <button class="mini-copy" id="copy-install" type="button">Copy</button>
+            <code id="install-code">mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills"
+cp -R skills/prepare-oci-support-request "${CODEX_HOME:-$HOME/.codex}/skills/"</code>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer-row">
+      <span>Prepare OCI Support Request is an independent Codex skill for structured OCI support intake.</span>
+      <a href="https://github.com/marcocanto/oci-support-request-skill">View the private repository</a>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.querySelector("#prompt-form");
+    const output = document.querySelector("#prompt-output");
+    const copyPrompt = document.querySelector("#copy-prompt");
+    const copyStatus = document.querySelector("#copy-status");
+    const copyInstall = document.querySelector("#copy-install");
+    const installCode = document.querySelector("#install-code");
+
+    function value(id) {
+      return document.querySelector(`#${id}`).value.trim();
+    }
+
+    function buildPrompt() {
+      const resource = value("resource") || "[affected resource OCID]";
+      const impact = value("impact") || "[describe the observed behavior and business impact]";
+      const prompt = [
+        `Use $prepare-oci-support-request for a ${value("service")} ${value("symptom")} issue.`,
+        "",
+        `Region: ${value("region") || "[region]"}`,
+        `UTC incident window: ${value("window") || "[start and end time in UTC]"}`,
+        `Affected resource: ${resource}`,
+        `Observed behavior or impact: ${impact}`,
+        "",
+        "First show the read-only evidence plan and any missing inputs. Do not create or update a support request unless I explicitly approve the exact action."
+      ].join("\n");
+      output.textContent = prompt;
+    }
+
+    async function copyText(text, button, successLabel) {
+      try {
+        await navigator.clipboard.writeText(text);
+        const previous = button.textContent;
+        button.textContent = successLabel;
+        setTimeout(() => {
+          button.textContent = previous;
+        }, 1800);
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    form.addEventListener("input", buildPrompt);
+    form.addEventListener("change", buildPrompt);
+
+    copyPrompt.addEventListener("click", async () => {
+      const copied = await copyText(output.textContent, copyPrompt, "Copied");
+      copyStatus.textContent = copied
+        ? "Prompt copied. Paste it into Codex and replace any placeholders."
+        : "Copy was blocked by the browser. Select the prompt text and copy it manually.";
+    });
+
+    copyInstall.addEventListener("click", async () => {
+      const copied = await copyText(installCode.textContent, copyInstall, "Copied");
+      if (!copied) {
+        copyInstall.textContent = "Select text";
+      }
+    });
+
+    buildPrompt();
+  </script>
+</body>
+</html>
