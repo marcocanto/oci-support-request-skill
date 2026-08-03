@@ -4,7 +4,7 @@ A Codex skill for preparing evidence-backed OCI technical support requests with 
 
 The skill selects issue-specific, read-only diagnostic commands, sanitizes collected JSON, generates a support-request payload, and optionally creates or updates an OCI Support service request after explicit user approval.
 
-The repository includes a [GitHub Pages-ready interactive overview](docs/index.html) with the workflow and a copy-ready starter prompt builder.
+Explore the [live interactive overview](https://marcocanto.github.io/oci-support-request-skill/) or view its [HTML source](docs/index.html). The page explains the workflow and includes a copy-ready starter prompt builder.
 
 ## What it does
 
